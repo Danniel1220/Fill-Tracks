@@ -5,6 +5,8 @@ import com.cdg.io.DrawingMaster;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.List;
 
 public class GameInstance extends JPanel {
@@ -13,31 +15,21 @@ public class GameInstance extends JPanel {
     private final int GRIDSIZE_WIDTH = 16;
     private final int GRIDSIZE_HEIGHT = 9;
 
-    private Tile[][] tileMap;
+    private Tile[][] tileMap = new Tile[GRIDSIZE_HEIGHT][GRIDSIZE_WIDTH];
 
-    private LevelLayout levelLayout;
-
-    private DrawingMaster drawingMaster;
+    private DrawingMaster drawingMaster = new DrawingMaster();
+    private LevelLayout levelLayout = LevelLayout.getInstance();
 
     public GameInstance() {
-        // Level Layout Singleton.
-        levelLayout = LevelLayout.getInstance();
+        // Print level layout to console.
+        levelLayout.printLeveLLayout();
 
-        // Utility class for drawing.
-        drawingMaster = new DrawingMaster();
+        // Update tileMap array.
+        updateTileMap();
+    }
 
-        // TileMap array.
-        tileMap = new Tile[GRIDSIZE_HEIGHT][GRIDSIZE_WIDTH];
-
-        // Prints out the level layout for debugging purposes
-        for(List<Integer> row : levelLayout.getLevelLayoutList()) {
-            for (Integer i : row) {
-                System.out.print(i + " ");
-            }
-            System.out.println();
-        }
-
-        // Creates the tileMap Array
+    private void updateTileMap() {
+        // Updates the tileMap array with whatever is inside the levelLayout singleton.
         int iIndex = 0;
         for(List<Integer> row : levelLayout.getLevelLayoutList()) {
             int jIndex = 0;
@@ -68,7 +60,7 @@ public class GameInstance extends JPanel {
         // Draw player tile.
         drawingMaster.drawPlayerTile(g2, tileMap);
 
-        repaint();
+        //repaint();
         g.dispose();
 
         //System.out.println("drawn...");

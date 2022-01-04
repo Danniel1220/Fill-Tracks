@@ -30,4 +30,8 @@ public class LevelLayout {
     public void setLevelLayoutList(List<List<Integer>> list) {
         this.levelLayoutList = list;
     }
+
+    public void printLeveLLayout() {
+
+    }
 }

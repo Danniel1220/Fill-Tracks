@@ -1,6 +1,8 @@
 package com.cdg.dao;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 public class Player extends Tile {
 
