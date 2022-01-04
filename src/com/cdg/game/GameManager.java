@@ -1,5 +1,6 @@
 package com.cdg.game;
 
+import com.cdg.dao.MovementDirection;
 import com.cdg.io.InputManager;
 
 import javax.swing.*;
@@ -11,6 +12,7 @@ public class GameManager implements KeyListener {
     private LevelLayout levelLayout;
 
     JFrame frame;
+    GameInstance gameInstance;
 
     public GameManager(JFrame frame) {
         // Passing the reference of the frame so we can perform actions on it.
@@ -24,7 +26,7 @@ public class GameManager implements KeyListener {
 
 
         // Creating an instance of the game and adding it to the frame.
-        GameInstance gameInstance = new GameInstance();
+        gameInstance = new GameInstance();
         gameInstance.setFocusable(true);
         gameInstance.requestFocus();
         frame.add(gameInstance);
@@ -42,20 +44,16 @@ public class GameManager implements KeyListener {
         int keyCode = e.getKeyCode();
         switch( keyCode ) {
             case KeyEvent.VK_UP:
-                // handle up
-                System.out.println("up");
+                gameInstance.sendInputToPlayer(MovementDirection.UP);
                 break;
             case KeyEvent.VK_DOWN:
-                // handle down
-                System.out.println("down");
+                gameInstance.sendInputToPlayer(MovementDirection.DOWN);
                 break;
             case KeyEvent.VK_LEFT:
-                // handle left
-                System.out.println("left");
+                gameInstance.sendInputToPlayer(MovementDirection.LEFT);
                 break;
             case KeyEvent.VK_RIGHT :
-                // handle right
-                System.out.println("right");
+                gameInstance.sendInputToPlayer(MovementDirection.RIGHT);
                 break;
         }
         System.out.println();

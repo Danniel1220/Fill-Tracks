@@ -17,13 +17,16 @@ public class DrawingMaster {
         int iIndex = 0;
         for(List<Integer> row : levelLayout.getLevelLayoutList()) {
             int jIndex = 0;
-            for (Integer i : row) {
-                // Logic that alternates the background's color.
-                if ((iIndex + jIndex) % 2 == 0) {
-                    tileMap[iIndex][jIndex].drawMe(g2, Color.decode("#1f3d6e"), false);
-                }
-                else {
-                    tileMap[iIndex][jIndex].drawMe(g2, Color.decode("#35507d"), false);
+            for (Integer integer : row) {
+                // Only drawing on background tiles
+                if (integer == 0) {
+                    // Logic that alternates the background's color.
+                    if ((iIndex + jIndex) % 2 == 0) {
+                        tileMap[iIndex][jIndex].drawMe(g2, Color.decode("#1f3d6e"), false);
+                    }
+                    else {
+                        tileMap[iIndex][jIndex].drawMe(g2, Color.decode("#35507d"), false);
+                    }
                 }
                 jIndex++;
             }
@@ -35,9 +38,9 @@ public class DrawingMaster {
         int iIndex = 0;
         for(List<Integer> row : levelLayout.getLevelLayoutList()) {
             int jIndex = 0;
-            for (Integer i : row) {
+            for (Integer integer : row) {
                 // Only drawing the playable map tiles.
-                if (i == 1 || i == 2) {
+                if (integer == 1) {
                     tileMap[iIndex][jIndex].drawMe(g2, Color.decode("#c86a37"), true);
                 }
                 jIndex++;
@@ -50,10 +53,10 @@ public class DrawingMaster {
         int iIndex = 0;
         for(List<Integer> row : levelLayout.getLevelLayoutList()) {
             int jIndex = 0;
-            for (Integer i : row) {
-                // Only drawing the playable map tiles.
-                if (i == 2) {
-                    tileMap[iIndex][jIndex].drawMe(g2, Color.decode("#282760"), false);
+            for (Integer integer : row) {
+                // Only drawing player tiles
+                if (integer == 2 || integer == 3) {
+                    tileMap[iIndex][jIndex].drawMe(g2, Color.decode("#282760"), true);
                 }
                 jIndex++;
             }

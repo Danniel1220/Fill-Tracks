@@ -34,4 +34,12 @@ public class LevelLayout {
     public void printLeveLLayout() {
 
     }
+
+    public int getValueFromLevelLayoutList(int x, int y) {
+        return Integer.parseInt(levelLayoutList.get(x).get(y).toString());
+    }
+
+    public void setValueInLevelLayoutList(int x, int y, int value) {
+        levelLayoutList.get(x).set(y, value);
+    }
 }

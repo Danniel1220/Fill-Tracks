@@ -1,12 +1,12 @@
 package com.cdg.game;
 
+import com.cdg.dao.MovementDirection;
+import com.cdg.dao.Player;
 import com.cdg.dao.Tile;
 import com.cdg.io.DrawingMaster;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.List;
 
 public class GameInstance extends JPanel {
@@ -20,12 +20,22 @@ public class GameInstance extends JPanel {
     private DrawingMaster drawingMaster = new DrawingMaster();
     private LevelLayout levelLayout = LevelLayout.getInstance();
 
+    private Player player;
+
     public GameInstance() {
         // Print level layout to console.
         levelLayout.printLeveLLayout();
 
         // Update tileMap array.
         updateTileMap();
+
+        // Create the player.
+        player = new Player(
+                WINDOW_WIDTH / GRIDSIZE_WIDTH,
+                WINDOW_HEIGHT / GRIDSIZE_HEIGHT,
+                0,
+                0,
+                tileMap);
     }
 
     private void updateTileMap() {
@@ -40,7 +50,6 @@ public class GameInstance extends JPanel {
                         jIndex * (WINDOW_WIDTH / GRIDSIZE_WIDTH),
                         iIndex * (WINDOW_WIDTH / GRIDSIZE_WIDTH));
                 tileMap[iIndex][jIndex] = tile;
-                this.add(tile);
                 jIndex++;
             }
             iIndex++;
@@ -66,10 +75,16 @@ public class GameInstance extends JPanel {
         //System.out.println("drawn...");
     }
 
+    public void sendInputToPlayer(MovementDirection direction) {
+        player.input(direction);
+        repaint();
+    }
+
     // DRAWING INSTRUCTIONS:
     // 0 : BACKGROUND TILE
     // 1 : PLAYABLE MAP TILE
     // 2 : PLAYABLE MAP TILE / PLAYER TILE
+    // 3 : CURRENT PLAYER POSITION TILE
 
 
 }
