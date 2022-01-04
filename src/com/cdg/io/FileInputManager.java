@@ -8,9 +8,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-public class InputManager {
-
-
+public class FileInputManager {
     public List<List<Integer>> readLevelLayout(String filePath) {
         List<List<Integer>> levelLayoutList = new ArrayList<>();
 

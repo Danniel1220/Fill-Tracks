@@ -22,56 +22,31 @@ public class Player extends Tile {
     private void traverseMap(MovementDirection direction) {
         List<List<Integer>> levelLayoutList = levelLayout.getLevelLayoutList();
         Point playerPosition = findPlayerPosition();
-        // If the point is valid
-        if (playerPosition.x != -1 && playerPosition.y != -1)
-        {
-            System.out.println("Checking if move is valid");
-            switch (direction)
-            {
+
+        // While we are able to move in a certain direction, continue to do so
+        while (moveDirectionIsValid(direction, playerPosition)) {
+            switch (direction) {
                 case UP:
-                    if (moveDirectionIsValid(direction, playerPosition)) {
-                        movePlayer(playerPosition, new Point(playerPosition.x - 1, playerPosition.y));
-                    }
-                    else {
-                        System.out.println("Move was invalid...");
-                    }
+                    movePlayer(playerPosition, new Point(playerPosition.x - 1, playerPosition.y));
+                    playerPosition = new Point(playerPosition.x - 1, playerPosition.y);
                     break;
                 case DOWN:
-                    if (moveDirectionIsValid(direction, playerPosition)) {
-                        movePlayer(playerPosition, new Point(playerPosition.x + 1, playerPosition.y));
-                    }
-                    else {
-                        System.out.println("Move was invalid...");
-                    }
+                    movePlayer(playerPosition, new Point(playerPosition.x + 1, playerPosition.y));
+                    playerPosition = new Point(playerPosition.x + 1, playerPosition.y);
                     break;
                 case LEFT:
-                    if (moveDirectionIsValid(direction, playerPosition)) {
-                        movePlayer(playerPosition, new Point(playerPosition.x, playerPosition.y - 1));
-                    }
-                    else {
-                        System.out.println("Move was invalid...");
-                    }
+                    movePlayer(playerPosition, new Point(playerPosition.x, playerPosition.y - 1));
+                    playerPosition = new Point(playerPosition.x, playerPosition.y - 1);
                     break;
                 case RIGHT:
-                    if (moveDirectionIsValid(direction, playerPosition)) {
-                        movePlayer(playerPosition, new Point(playerPosition.x, playerPosition.y + 1));
-                    }
-                    else {
-                        System.out.println("Move was invalid...");
-                    }
+                    movePlayer(playerPosition, new Point(playerPosition.x, playerPosition.y + 1));
+                    playerPosition = new Point(playerPosition.x, playerPosition.y + 1);
                     break;
             }
         }
-
-
-
     }
 
     private void movePlayer(Point currentPosition, Point newPosition) {
-        if (newPosition.x == 3 && newPosition.y == 8) {
-            System.out.println("yes");
-        }
-
         levelLayout.setValueInLevelLayoutList(currentPosition.x, currentPosition.y, 2);
         levelLayout.setValueInLevelLayoutList(newPosition.x, newPosition.y, 3);
 

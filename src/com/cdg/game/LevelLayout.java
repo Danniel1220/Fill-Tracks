@@ -31,10 +31,6 @@ public class LevelLayout {
         this.levelLayoutList = list;
     }
 
-    public void printLeveLLayout() {
-
-    }
-
     public int getValueFromLevelLayoutList(int x, int y) {
         return Integer.parseInt(levelLayoutList.get(x).get(y).toString());
     }

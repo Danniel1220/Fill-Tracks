@@ -4,9 +4,11 @@ import com.cdg.dao.MovementDirection;
 import com.cdg.dao.Player;
 import com.cdg.dao.Tile;
 import com.cdg.io.DrawingMaster;
+import com.cdg.io.FileInputManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 import java.util.List;
 
 public class GameInstance extends JPanel {
@@ -19,23 +21,37 @@ public class GameInstance extends JPanel {
 
     private DrawingMaster drawingMaster = new DrawingMaster();
     private LevelLayout levelLayout = LevelLayout.getInstance();
+    private FileInputManager fileInputManager = new FileInputManager();
 
-    private Player player;
+    private Player player = new Player(
+            WINDOW_WIDTH / GRIDSIZE_WIDTH,
+            WINDOW_HEIGHT / GRIDSIZE_HEIGHT,
+            0,
+            0,
+            tileMap);
+
+    private int currentLevel = 1;
 
     public GameInstance() {
-        // Print level layout to console.
-        levelLayout.printLeveLLayout();
-
-        // Update tileMap array.
+        fetchLevel();
         updateTileMap();
+    }
 
-        // Create the player.
-        player = new Player(
-                WINDOW_WIDTH / GRIDSIZE_WIDTH,
-                WINDOW_HEIGHT / GRIDSIZE_HEIGHT,
-                0,
-                0,
-                tileMap);
+    private void fetchLevel() {
+        levelLayout.setLevelLayoutList(fileInputManager.readLevelLayout("Levels/" + currentLevel));
+    }
+
+    private boolean isLevelComplete() {
+        boolean isComplete = true;
+
+        for(List<Integer> row : levelLayout.getLevelLayoutList()) {
+            for (Integer i : row) {
+                // If there are still any playable tiles left unvisited
+                if (i == 1) isComplete = false;
+            }
+        }
+
+        return isComplete;
     }
 
     private void updateTileMap() {
@@ -43,7 +59,7 @@ public class GameInstance extends JPanel {
         int iIndex = 0;
         for(List<Integer> row : levelLayout.getLevelLayoutList()) {
             int jIndex = 0;
-            for (Integer i : row) {
+            for (Integer integer : row) {
                 Tile tile = new Tile(
                         WINDOW_WIDTH / GRIDSIZE_WIDTH,
                         WINDOW_WIDTH / GRIDSIZE_WIDTH,
@@ -69,15 +85,24 @@ public class GameInstance extends JPanel {
         // Draw player tile.
         drawingMaster.drawPlayerTile(g2, tileMap);
 
-        //repaint();
         g.dispose();
 
-        //System.out.println("drawn...");
+        System.out.println("drawn...");
     }
 
-    public void sendInputToPlayer(MovementDirection direction) {
+    public void input(MovementDirection direction) {
         player.input(direction);
         repaint();
+
+        if (isLevelComplete()) {
+            currentLevel++;
+            fetchLevel();
+            updateTileMap();
+        }
+    }
+
+    private int getNumberOfLevels() {
+        return new File("Levels").list().length;
     }
 
     // DRAWING INSTRUCTIONS:
@@ -85,6 +110,4 @@ public class GameInstance extends JPanel {
     // 1 : PLAYABLE MAP TILE
     // 2 : PLAYABLE MAP TILE / PLAYER TILE
     // 3 : CURRENT PLAYER POSITION TILE
-
-
 }

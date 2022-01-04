@@ -1,11 +1,8 @@
 package com.cdg.run;
 
-import com.cdg.game.GameInstance;
 import com.cdg.game.GameManager;
-import com.cdg.io.InputManager;
 
 import javax.swing.*;
-import java.util.List;
 
 public class Run {
     public static void main(String[] args) {
