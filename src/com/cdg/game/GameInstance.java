@@ -3,6 +3,7 @@ package com.cdg.game;
 import com.cdg.dao.MovementDirection;
 import com.cdg.dao.Player;
 import com.cdg.dao.Tile;
+import com.cdg.factory.TileFactory;
 import com.cdg.io.DrawingMaster;
 import com.cdg.io.FileInputManager;
 
@@ -50,21 +51,17 @@ public class GameInstance extends JPanel {
                 if (i == 1) isComplete = false;
             }
         }
-
         return isComplete;
     }
 
     private void updateTileMap() {
+        TileFactory factory = new TileFactory(WINDOW_WIDTH / GRIDSIZE_WIDTH, WINDOW_HEIGHT / GRIDSIZE_HEIGHT);
         // Updates the tileMap array with whatever is inside the levelLayout singleton.
         int iIndex = 0;
         for(List<Integer> row : levelLayout.getLevelLayoutList()) {
             int jIndex = 0;
             for (Integer integer : row) {
-                Tile tile = new Tile(
-                        WINDOW_WIDTH / GRIDSIZE_WIDTH,
-                        WINDOW_WIDTH / GRIDSIZE_WIDTH,
-                        jIndex * (WINDOW_WIDTH / GRIDSIZE_WIDTH),
-                        iIndex * (WINDOW_WIDTH / GRIDSIZE_WIDTH));
+                Tile tile = factory.getTileObject(jIndex * (WINDOW_WIDTH / GRIDSIZE_WIDTH), iIndex * (WINDOW_WIDTH / GRIDSIZE_WIDTH));
                 tileMap[iIndex][jIndex] = tile;
                 jIndex++;
             }
@@ -100,14 +97,4 @@ public class GameInstance extends JPanel {
             updateTileMap();
         }
     }
-
-    private int getNumberOfLevels() {
-        return new File("Levels").list().length;
-    }
-
-    // DRAWING INSTRUCTIONS:
-    // 0 : BACKGROUND TILE
-    // 1 : PLAYABLE MAP TILE
-    // 2 : PLAYABLE MAP TILE / PLAYER TILE
-    // 3 : CURRENT PLAYER POSITION TILE
 }
