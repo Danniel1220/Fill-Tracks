@@ -3,6 +3,7 @@ package com.cdg.game;
 import com.cdg.dao.MovementDirection;
 import com.cdg.dao.Player;
 import com.cdg.dao.Tile;
+import com.cdg.facade.DrawingFacade;
 import com.cdg.factory.TileFactory;
 import com.cdg.io.DrawingMaster;
 import com.cdg.io.FileInputManager;
@@ -20,7 +21,7 @@ public class GameInstance extends JPanel {
 
     private Tile[][] tileMap = new Tile[GRIDSIZE_HEIGHT][GRIDSIZE_WIDTH];
 
-    private DrawingMaster drawingMaster = new DrawingMaster();
+    private DrawingFacade drawingFacade = new DrawingFacade();
     private LevelLayout levelLayout = LevelLayout.getInstance();
     private FileInputManager fileInputManager = new FileInputManager();
 
@@ -74,13 +75,13 @@ public class GameInstance extends JPanel {
         Graphics2D g2 = (Graphics2D) g;
 
         // Draw background tiles on the screen according to the tileMap.
-        drawingMaster.drawBackgroundTiles(g2, tileMap);
+        drawingFacade.drawBackground(g2, tileMap);
 
         // Draw playable map tiles on the screen according to the tilemap.
-        drawingMaster.drawLevelTiles(g2, tileMap);
+        drawingFacade.drawLevel(g2, tileMap);
 
         // Draw player tile.
-        drawingMaster.drawPlayerTile(g2, tileMap);
+        drawingFacade.drawPlayer(g2, tileMap);
 
         g.dispose();
 
