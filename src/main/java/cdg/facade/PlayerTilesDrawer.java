@@ -1,7 +1,7 @@
-package com.cdg.facade;
+package cdg.facade;
 
-import com.cdg.dao.Tile;
-import com.cdg.game.LevelLayout;
+import cdg.dao.Tile;
+import cdg.game.LevelLayout;
 
 import java.awt.*;
 import java.util.List;

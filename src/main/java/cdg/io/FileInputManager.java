@@ -1,4 +1,4 @@
-package com.cdg.io;
+package cdg.io;
 
 import java.io.File;
 import java.io.FileNotFoundException;

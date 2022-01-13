@@ -1,4 +1,4 @@
-package com.cdg.dao;
+package cdg.dao;
 
 import javax.swing.*;
 import java.awt.*;

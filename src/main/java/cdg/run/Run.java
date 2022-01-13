@@ -1,6 +1,6 @@
-package com.cdg.run;
+package cdg.run;
 
-import com.cdg.game.GameManager;
+import cdg.game.GameManager;
 
 import javax.swing.*;
 

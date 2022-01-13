@@ -1,11 +1,11 @@
-package com.cdg.game;
+package cdg.game;
 
-import com.cdg.dao.MovementDirection;
-import com.cdg.dao.Player;
-import com.cdg.dao.Tile;
-import com.cdg.facade.DrawingFacade;
-import com.cdg.factory.TileFactory;
-import com.cdg.io.FileInputManager;
+import cdg.dao.MovementDirection;
+import cdg.dao.Player;
+import cdg.dao.Tile;
+import cdg.facade.DrawingFacade;
+import cdg.factory.TileFactory;
+import cdg.io.FileInputManager;
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;

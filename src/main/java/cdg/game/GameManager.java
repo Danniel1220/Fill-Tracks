@@ -1,6 +1,6 @@
-package com.cdg.game;
+package cdg.game;
 
-import com.cdg.dao.MovementDirection;
+import cdg.dao.MovementDirection;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;

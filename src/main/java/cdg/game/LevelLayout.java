@@ -1,8 +1,7 @@
-package com.cdg.game;
+package cdg.game;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 
 public class LevelLayout {
     private static LevelLayout single_instance = null;

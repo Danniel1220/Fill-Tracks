@@ -1,7 +1,7 @@
-package com.cdg.factory;
+package cdg.factory;
 
-import com.cdg.dao.Player;
-import com.cdg.dao.Tile;
+import cdg.dao.Player;
+import cdg.dao.Tile;
 
 public class TileFactory {
     private final int width;

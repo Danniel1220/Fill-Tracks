@@ -1,6 +1,6 @@
-package com.cdg.facade;
+package cdg.facade;
 
-import com.cdg.dao.Tile;
+import cdg.dao.Tile;
 
 import java.awt.*;
 

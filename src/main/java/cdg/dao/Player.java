@@ -1,6 +1,6 @@
-package com.cdg.dao;
+package cdg.dao;
 
-import com.cdg.game.LevelLayout;
+import cdg.game.LevelLayout;
 
 import java.awt.*;
 import java.util.List;
