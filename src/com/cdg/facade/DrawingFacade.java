@@ -1,14 +1,13 @@
 package com.cdg.facade;
 
 import com.cdg.dao.Tile;
-import com.cdg.io.DrawingMaster;
 
 import java.awt.*;
 
 public class DrawingFacade {
-    private BackgroundTilesDrawer backgroundTilesDrawer = new BackgroundTilesDrawer();
-    private LevelTilesDrawer levelTilesDrawer = new LevelTilesDrawer();
-    private PlayerTilesDrawer playerTilesDrawer = new PlayerTilesDrawer();
+    private final BackgroundTilesDrawer backgroundTilesDrawer = new BackgroundTilesDrawer();
+    private final LevelTilesDrawer levelTilesDrawer = new LevelTilesDrawer();
+    private final PlayerTilesDrawer playerTilesDrawer = new PlayerTilesDrawer();
 
     public void drawBackground(Graphics2D g2, Tile[][] tileMap) {
         backgroundTilesDrawer.drawBackgroundTiles(g2, tileMap);

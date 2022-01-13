@@ -5,12 +5,9 @@ import com.cdg.dao.Player;
 import com.cdg.dao.Tile;
 import com.cdg.facade.DrawingFacade;
 import com.cdg.factory.TileFactory;
-import com.cdg.io.DrawingMaster;
 import com.cdg.io.FileInputManager;
-
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
 import java.util.List;
 
 public class GameInstance extends JPanel {
@@ -21,16 +18,12 @@ public class GameInstance extends JPanel {
 
     private Tile[][] tileMap = new Tile[GRIDSIZE_HEIGHT][GRIDSIZE_WIDTH];
 
-    private DrawingFacade drawingFacade = new DrawingFacade();
-    private LevelLayout levelLayout = LevelLayout.getInstance();
-    private FileInputManager fileInputManager = new FileInputManager();
+    private final DrawingFacade drawingFacade = new DrawingFacade();
+    private final LevelLayout levelLayout = LevelLayout.getInstance();
+    private final FileInputManager fileInputManager = new FileInputManager();
+    private final TileFactory tileFactory = new TileFactory(WINDOW_WIDTH / GRIDSIZE_WIDTH, WINDOW_HEIGHT / GRIDSIZE_HEIGHT);
 
-    private Player player = new Player(
-            WINDOW_WIDTH / GRIDSIZE_WIDTH,
-            WINDOW_HEIGHT / GRIDSIZE_HEIGHT,
-            0,
-            0,
-            tileMap);
+    private final Player player = tileFactory.createPlayerTile(0, 0, tileMap);
 
     private int currentLevel = 1;
 
@@ -49,7 +42,10 @@ public class GameInstance extends JPanel {
         for(List<Integer> row : levelLayout.getLevelLayoutList()) {
             for (Integer i : row) {
                 // If there are still any playable tiles left unvisited
-                if (i == 1) isComplete = false;
+                if (i == 1) {
+                    isComplete = false;
+                    break;
+                }
             }
         }
         return isComplete;
@@ -62,7 +58,7 @@ public class GameInstance extends JPanel {
         for(List<Integer> row : levelLayout.getLevelLayoutList()) {
             int jIndex = 0;
             for (Integer integer : row) {
-                Tile tile = factory.getTileObject(jIndex * (WINDOW_WIDTH / GRIDSIZE_WIDTH), iIndex * (WINDOW_WIDTH / GRIDSIZE_WIDTH));
+                Tile tile = tileFactory.createLevelTile(jIndex * (WINDOW_WIDTH / GRIDSIZE_WIDTH), iIndex * (WINDOW_WIDTH / GRIDSIZE_WIDTH));
                 tileMap[iIndex][jIndex] = tile;
                 jIndex++;
             }
